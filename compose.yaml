@@ -1,0 +1,19 @@
+services:
+  backend1:
+    image: docker.io/traefik/whoami
+    hostname: backend1
+    command:
+    - -verbose
+  backend2:
+    image: docker.io/traefik/whoami
+    hostname: backend2
+    command:
+    - -verbose
+  frontend:
+    build:
+      context: .
+      dockerfile: Containerfile
+    volumes:
+    - ./varnish:/etc/varnish/
+    ports:
+    - 127.0.0.1:8080:80
